@@ -78,6 +78,7 @@ namespace CalcGame
 
         private void startBtn_Click(object sender, EventArgs e)
         {
+            
             Init();
             bullet = BulletNum;
 
@@ -89,6 +90,11 @@ namespace CalcGame
         }
 
         private void shootBtn_Click(object sender, EventArgs e)
+        {
+            Shoot();
+        }
+
+        private void Shoot()
         {
             bullet--;
             var target = targetList[targetPos];
@@ -125,8 +131,17 @@ namespace CalcGame
             else
             {
                 // ステージ続行
-                var showStr = string.Join("", retVal.invader);
-                InvaderTbox.Text = showStr;
+                if (null == retVal.invader)
+                {
+                    // 表示するインベーダーなし
+                    InvaderTbox.Text = "";
+                }
+                else
+                {
+                    // インベーダーあり
+                    var showStr = string.Join("", retVal.invader);
+                    InvaderTbox.Text = showStr;
+                }
             }
 
             return;
@@ -134,8 +149,20 @@ namespace CalcGame
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            var a = 0;
-            a++;
+            e.Handled = true;           // コントロールにキーイベントを渡さない
+
+            // キーイベント処理
+            switch (e.KeyCode)
+            {
+                case Keys.Z:    // ターゲットボタン
+                    NextTarget();
+                    break;
+                case Keys.Oem102:    // 攻撃ボタン
+                    Shoot();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

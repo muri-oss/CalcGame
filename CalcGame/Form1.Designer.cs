@@ -113,6 +113,7 @@
             this.Controls.Add(this.targetTbox);
             this.Controls.Add(this.InvaderTbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
